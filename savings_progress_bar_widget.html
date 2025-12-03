@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Savings Progress Bar</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f6f7f8;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    h2 {
+      margin-bottom: 10px;
+    }
+    .container {
+      width: 100%;
+      max-width: 400px;
+      background-color: #e0e0e0;
+      border-radius: 25px;
+      overflow: hidden;
+      margin-bottom: 15px;
+    }
+    .progress-bar {
+      height: 30px;
+      width: 0%;
+      background-color: #6cbf84;
+      text-align: center;
+      line-height: 30px;
+      color: white;
+      transition: width 0.5s;
+    }
+    .input-area {
+      margin-top: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+    input[type="number"] {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 100%;
+    }
+    button {
+      padding: 10px;
+      background-color: #6cbf84;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #5aa06e;
+    }
+  </style>
+</head>
+<body>
+  <h2>Oh Sh*t Fund Tracker</h2>
+  <div class="container">
+    <div id="progress-bar" class="progress-bar">0%</div>
+  </div>
+  <div class="input-area">
+    <input type="number" id="goal" placeholder="Enter your goal amount (e.g., 5000)">
+    <input type="number" id="saved" placeholder="Enter current amount saved">
+    <button onclick="updateProgress()">Update Progress</button>
+  </div>
+
+  <script>
+    function updateProgress() {
+      const goal = parseFloat(document.getElementById('goal').value);
+      const saved = parseFloat(document.getElementById('saved').value);
+      const bar = document.getElementById('progress-bar');
+
+      if (isNaN(goal) || isNaN(saved) || goal <= 0 || saved < 0) {
+        alert("Please enter valid numbers.");
+        return;
+      }
+
+      let percentage = Math.min((saved / goal) * 100, 100).toFixed(1);
+      bar.style.width = percentage + '%';
+      bar.textContent = percentage + '%';
+    }
+  </script>
+</body>
+</html>
